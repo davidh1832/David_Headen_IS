@@ -3,9 +3,9 @@
 
 # Usage
 Python
+Swift
 # Installation
 - Obtain your OpenAI API key from the OpenAI website.
-- Replace 'your_openai_api_key' in the code with your actual API key.
 - Clone Repository: 
  ```bash
 git clone https://github.com/davidh1832/David_Headen_IS.git
@@ -14,6 +14,7 @@ git clone https://github.com/davidh1832/David_Headen_IS.git
 app2.py: Streamlit web app implementation of the Echo mental health chatbot
 quote_api.py: RAG retrieval backend logic for Echo. Utilizes Fast API to connect backend logic to Swift UI front end application
 Sentiment.py: VADER sentiment analysis file
+ContentView.swift: Main app UI page in mobile application. Manages conversation state, message rendering, user input, and asynchronous communication with Python backend API. Displays messages as chatbubbles with timestamps, supports optional religious quote integration (Bible, Quran, Torah), and updates the UI as the user sends and recieves messages. 
 
 chatbot.py: finalized python code to execute in terminal
 # Datasets
