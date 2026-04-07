@@ -1,7 +1,6 @@
 # Mental-Health-Chat-Bot
- This Project is a web & mobile Mental Health Chat Bot called Echo, that leverages natural language processing techniques, and Openai's GPT-4o model. This program uses Cosine Similarity to compare data from mental health chatbot datasets to user input to find a most similar row to user input, and Openai's GPT 4-o model to tailor the most similar response to be more empathetic to the needs of the user. Also computes sentiment and subjectivity analysis of the user input to recognize feelings and emotions.
-
- The web application is built using Streamlit, and the mobile applicaton is built using Swift, the primary coding language of IOS. A Rest API connects the front end UI to the back end logic using a Uvicorn server and Fast API to create asynchronous calls. 
+ This Project is a web & mobile Mental Health Chat Bot called Echo, that leverages natural language processing techniques, and Openai's GPT-4o model to deliver empathetic conversational support to users. This program uses Cosine Similarity to match user input from curated mental health chatbot datasets, refinement using Openai's GPT-4o model for personalized responses, and performs sentiment and subjectivity analysis to better understand the user's emotions.  
+ The web application is built using Streamlit in Python, while the mobile applicaton is developed in Swift, the primary coding language for IOS. A Rest API connects the front-end interface to the backend logic using a Uvicorn server and Fast API, producing asynchronous communication between AI services and the user interface. 
 
 # Usage
 Python
