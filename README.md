@@ -33,8 +33,11 @@ TestMHCBAPP.swift: This file serves as the main entry point of the iOS applicati
 
 # Datasets
 Combined three hugging face datasets to compute semantic similarity between user input mental health chat bot datasets. All datasets can be accessed from the Hugging Face website.
+
 Dataset 1: Amod/mental_health_counseling_conversations
+
 Dataset 2: hf://datasets/ShivomH/Mental-Health-Conversations/mental-health-dataset.jsonl
+
 Dataset 3: hf://datasets/fadodr/mental_health_dataset/
 
 
