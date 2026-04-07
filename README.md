@@ -13,7 +13,11 @@ Streamlit
 git clone https://github.com/davidh1832/David_Headen_IS.git
 ```
 - Required packages: pandas, numpy, scikit-learn, openai, spacy, sentence-transformers, transformers, datasets, joblib, scipy, pyarrow
-- Run in terminal to access spacy language model: "python -m spacy download en_core_web_sm"
+- Run in terminal to access spacy language model: 
+```bash
+  python -m spacy download en_core_web_sm
+  ```
+ 
 # Files
 app2.py: Streamlit web app implementation of the Echo mental health chatbot
 
