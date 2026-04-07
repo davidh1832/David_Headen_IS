@@ -1,3 +1,5 @@
+
+
 import streamlit as st
 import sentiment
 import quote_api
@@ -38,7 +40,7 @@ quote_choice = st.sidebar.radio(
 )
 st.session_state.quote_source = quote_choice if quote_choice != "None" else None
 
-# Input area
+# User input area
 with st.form(key="chat_form"):
     column1, column2 = st.columns([4.5, 1])
     with column1:
@@ -58,7 +60,7 @@ if user_input and send_button:
         "time": datetime.now().isoformat()
     })
 
-    # Call the wrapper — user_id handles conversation history internally via SQLite
+    # TF-IDF, Cosine Similarity, and GPT-4o refinement step
     refined_response = quote_api.refine_response_with_gpt(user_input, user_id="default_user")
     response = refined_response
 
