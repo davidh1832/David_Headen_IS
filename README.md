@@ -8,7 +8,7 @@ Python
 - Replace 'your_openai_api_key' in the code with your actual API key.
 - Clone Repository: 
  ```bash
-git clone https://github.com/davidh1832/Mental-Health-Chat-Bot.git
+git clone https://github.com/davidh1832/David_Headen_IS.git
 ```
 # Files
 app2.py: Streamlit web app implementation of the Echo mental health chatbot
