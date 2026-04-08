@@ -1,7 +1,7 @@
 import SwiftUI
 // This code is the Login page for the Echo app. Users can submit their username and password to login to their account.
 struct LoginView: View {
-    // State variables to store user credentials
+    // store user credentials
     @State private var username = ""
     @State private var password = ""
     
@@ -9,7 +9,7 @@ struct LoginView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color.blue_color
+                Color.blue_color //Background color
                     .ignoresSafeArea()
                 
                 VStack(spacing: 25) {
@@ -56,9 +56,6 @@ struct LoginView: View {
                             .cornerRadius(12)
                     }
                     .padding(.horizontal)
-                    
-                    
-                    
                     Spacer()
                     
                     // Back to sign-up page
