@@ -236,14 +236,14 @@ class Core:
         return row["Quote"], row["Chapter"], row["Source"]
 
 
-# Initialize the core logic object one time when the app starts
+# Initialize the core object one time when the app starts
 try:
     chatbot_instance = Core()
 except FileNotFoundError:
     print(f"Loading failed unexpectedly! Please try again later")
     raise
 
-# Define the messages as strings
+
 class ChatRequest(BaseModel):
     user_input: str
     user_id: str = "default_1"
