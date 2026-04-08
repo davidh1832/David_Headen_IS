@@ -1,4 +1,3 @@
-
 import SwiftUI
 import Foundation
 // This is the main chat inferface for the Echo mobile application, where users czn submit queries and recieve theraputic advice and/or religious quotes from sacred texts to address their struggles
@@ -7,7 +6,6 @@ enum MessageRole {
     case user
     case bot
 }
-// Messages with user id, role, and timestamp of the message
 struct Message: Identifiable, Equatable {
     let id = UUID()
     let text: String
@@ -17,7 +15,6 @@ struct Message: Identifiable, Equatable {
     var isUser: Bool { role == .user }
     
 }
-//Quotes with chapter and source (Bible, Quran, Torah)
 struct QuoteResponse: Codable {
     let quote: String
     let chapter: String
@@ -27,24 +24,21 @@ struct QuoteResponse: Codable {
 // Structure of the container
 struct MentalHealthChatbotUI: View {
     
-    // Handle requests to python backend
+    // Request Handling
     private let apiService = ChatbotAPI()
     
-    // track conversation history with python backend
     private let userID = UUID().uuidString
     
-    // AI generated hex colors
-    private let blue_color = Color(hex: "63C8F2")
-    private let green_color = Color(hex: "06D6A0")
     
-    // holds the array of the chat history
+    
+    //  chat history
     @State private var messages: [Message] = [
         Message(text: "Hello! My name is Echo, and i'm here to listen and offer support. How are you feeling today?", role: .bot)
     ]
     
-    @State private var currentInput: String = "" //state for current user input
+    @State private var currentInput: String = ""
     @State private var isSending = false // Loading indicator
-    @State private var selectedSource: String = "None" //default source to none
+    @State private var selectedSource: String = "None"
     private let sources = ["None", "Bible", "Quran", "Torah"]
 
     var body: some View {
@@ -61,7 +55,7 @@ struct MentalHealthChatbotUI: View {
             // Header Area
             .navigationTitle("Chat with Echo")
             .navigationBarTitleDisplayMode(.inline)
-            .toolbarBackground(blue_color, for: .navigationBar) //light blue, AI generated hex color
+            .toolbarBackground(Color.blue_color, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
             .toolbarColorScheme(.dark, for: .navigationBar)
             .toolbar {
@@ -80,7 +74,6 @@ struct MentalHealthChatbotUI: View {
         }
     }
     
-    // Previous Chats
     //Allows scrolling and loops through message array to view all previous chats
     private var chatHistory: some View {
         ScrollViewReader { proxy in
@@ -120,9 +113,10 @@ struct MentalHealthChatbotUI: View {
                         Image(systemName: "book.closed.fill") // AI generated book image
                             .resizable()
                             .frame(width: 24, height: 24)
-                            .foregroundColor(selectedSource == "None" ? .gray : green_color) // Green when active, AI generated hex color
+                            .foregroundColor(selectedSource == "None" ? .gray : Color.green_color)
                     }
                     .padding(.bottom, 4)
+            
             TextField("Type your message...", text: $currentInput, axis: .vertical)
                 .padding(.vertical, 8)
                 .padding(.horizontal, 12)
@@ -133,7 +127,7 @@ struct MentalHealthChatbotUI: View {
                         .stroke(Color(.systemGray3), lineWidth: 1)
                 )
                 .lineLimit(1...5) // As the user types, if the number of lines exceeds 5, scrolling in input bar occurs
-            // Send Button
+           
             if isSending {
                 ProgressView() //API loading
                     .frame(width: 32, height: 32)
@@ -144,7 +138,7 @@ struct MentalHealthChatbotUI: View {
                     Image(systemName: "arrow.up.circle.fill") // AI generated image
                         .resizable()
                         .frame(width: 32, height: 32)
-                        .foregroundColor(currentInput.isEmpty ? Color(.systemGray) : blue_color)
+                        .foregroundColor(currentInput.isEmpty ? Color(.systemGray) : Color.blue_color)
                 }
                 // Send button is disabled if text field is empty
                 .disabled(currentInput.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
@@ -154,39 +148,39 @@ struct MentalHealthChatbotUI: View {
         .padding(.horizontal)
         .padding(.vertical, 10)
         .background(Color(.systemBackground))
-        .shadow(color: Color(.systemGray4).opacity(0.5), radius: 3, x: 0, y: -1)// Seperates input from chat history
+        .shadow(color: Color(.systemGray4).opacity(0.5), radius: 3, x: 0, y: -1)
     }
     
-    //Calling Backend
+    
     private func sendMessage() {
         guard !currentInput.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return } // Exit if input field is empty
         
        
-        let userMessageText = currentInput
+        let input = currentInput
         let sourceToUse = selectedSource
         currentInput = "" // Clears input box
         
-        let userMessage = Message(text: userMessageText, role: .user)
-        messages.append(userMessage) //Add user Message
+        let user_message = Message(text: input, role: .user)
+        messages.append(user_message) //Add user Message
         
         Task {
             await MainActor.run { isSending = true } // Loading indicator
             
             // Backend call
             do {
-                var botResponseText = try await apiService.getChatbotResponse(
-                    userInput: userMessageText,
+                var bot_response = try await apiService.getChatbotResponse(
+                    userInput: input,
                     userID: self.userID
                 )
                 //QUote request
                 if sourceToUse != "None" {
-                if let quoteData = try? await apiService.getReligiousQuote(userInput: userMessageText, source: sourceToUse.lowercased()) {
+                if let quoteData = try? await apiService.getReligiousQuote(userInput: input, source: sourceToUse.lowercased()) {
                     let quoteSection = "\n\n\n**The \(quoteData.source) (\(quoteData.chapter)):**\n*\"\(quoteData.quote)\"* "
-                    botResponseText += quoteSection // append quotes to bot response
+                    bot_response += quoteSection // append quotes to bot response
                                     }
                                 }
                 // I was getting //n in the bot response text, this code removes it
-                let cleaned = botResponseText
+                let cleaned = bot_response
                     .replacingOccurrences(of: "\\n", with: "\n")
                     .replacingOccurrences(of: "\n\n", with: "\n")
                     .trimmingCharacters(in: .whitespacesAndNewlines)
@@ -197,7 +191,7 @@ struct MentalHealthChatbotUI: View {
             // Add message from the backend to the UI
                 await MainActor.run {
                     messages.append(botMessage)
-                    selectedSource = "None" // Reset the book icon after initial run
+                    selectedSource = "None" // Reset the book icon
                 }
                 //Error Handling
             } catch {
@@ -234,12 +228,12 @@ struct ChatBubble: View {
             
             VStack(alignment: message.isUser ? .trailing : .leading, spacing: 4) { // User message on right side, bot on left.
                 
-                Text(LocalizedStringKey(message.text)) //Makes text markdown, allows bold and italized text
+                Text(LocalizedStringKey(message.text)) //AI generated line, makes text markdown, allows bold and italized text
                                     .font(.body)
                                     .lineSpacing(4)
                                     .multilineTextAlignment(.leading) // text always starts on left side
                                     .fixedSize(horizontal: false, vertical: true)
-                                    .padding(12) 
+                                    .padding(12)
                                     .background(message.isUser ? Color.blue_color : Color.green_color) //user blue, bot green
                                     .clipShape(bubbleShape(isUser: message.isUser))
               
@@ -258,9 +252,9 @@ struct ChatBubble: View {
             }
         }
     }
-    // Creates rectangular shaped message bubbles
+    // rectangular shaped message bubbles
     private func bubbleShape(isUser: Bool) -> some Shape {
-        let radius: CGFloat = 15 // 15 pixels for rounded corners
+        let radius: CGFloat = 15 
         return UnevenRoundedRectangle(
             topLeadingRadius: radius, //15 pixels for top-left corner
             bottomLeadingRadius: isUser ? radius : 5, //If bot, make bottom left corner 5 pixels
@@ -269,6 +263,7 @@ struct ChatBubble: View {
         )
     }
 }
+
 
 
 
