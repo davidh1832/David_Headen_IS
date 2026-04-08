@@ -27,7 +27,7 @@ struct SignUpView: View {
     var isFormValid: Bool {
         !firstName.isEmpty && !lastName.isEmpty && isEmailValid && passwordsMatch && password.count >= 6
     }
-
+    // Formatting
     var body: some View {
         NavigationStack {
             ZStack {
