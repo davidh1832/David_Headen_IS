@@ -1,5 +1,5 @@
 from textblob import TextBlob
-
+'''This file computes sentiment and subjectivity using VADER sentiment and textblob.'''
 
 
 
@@ -14,8 +14,8 @@ negative_keywords = [
 
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 import re
-# This function calculates the sentiment score of user input using Vader Sentiment, and Subjectivity score with Textblob
 def vader_sentiment_analysis(text: str):
+    ''' This function calculates the sentiment score of user input using Vader Sentiment, and Subjectivity score with Textblob.'''
     analysis = TextBlob(text)
     analyzer = SentimentIntensityAnalyzer()
     scores = analyzer.polarity_scores(text)
@@ -27,7 +27,7 @@ def vader_sentiment_analysis(text: str):
     text_lower = text.lower()
     text_clean = re.sub(r'[^\w\s]', '', text_lower)  # remove punctuation
 
-
+    #Subjectivity score calculation
     if subjectivity > 0.7:
         subjectivity_category = "Highly Subjective"
     elif 0.4 < subjectivity <= 0.7:
