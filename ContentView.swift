@@ -1,7 +1,7 @@
 import SwiftUI
 import Foundation
 // This is the main chat inferface for the Echo mobile application, where users czn submit queries and recieve theraputic advice and/or religious quotes from sacred texts to address their struggles
-// User or Bot
+
 enum MessageRole {
     case user
     case bot
