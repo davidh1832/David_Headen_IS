@@ -1,4 +1,5 @@
-
+# This page is the Echo Streamlit web application that is hosted on a web browser, where users can submit queries and/or select religious quotes, 
+#and receive theraputic advice and religious quotes to their mental health queries
 
 import streamlit as st
 import sentiment
@@ -8,8 +9,9 @@ from datetime import datetime
 
 st.set_page_config(page_title="Echo: Mental Health Chatbot", layout="centered")
 st.title("Echo Chatbot")
-st.write("Hello, my name is Echo and I am here to support your mental health journey. What's on your mind today?")
+st.write("Hello! My name is Echo, and i'm here to listen and offer support. How are you feeling today?")
 
+#Style and Formatting
 st.markdown(
     """
     <style>
@@ -32,6 +34,7 @@ if "chat_history" not in st.session_state:
 if "quote_source" not in st.session_state:
     st.session_state.quote_source = None
 
+#Sacred text selection tool
 st.sidebar.title("Quote Settings")
 quote_choice = st.sidebar.radio(
     "Select Religious Quote Source",
