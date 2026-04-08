@@ -157,19 +157,13 @@ class Core:
         if not user_input.strip():
             return "Please type a message."
 
-
-
         # chat history retrieval
         history_text = self.get_chat_history(user_id)
 
         # TF-IDF cosine similarity retrieval
         best_match = self.most_similar_response(user_input)
 
-
-
-
         # sentiment analysis
-
         sentiment = vader_sentiment_analysis(user_input)
 
 
@@ -195,14 +189,11 @@ class Core:
 
         # Call GPT-4o
         try:
-
             refined_resp = self.openai_client.chat.completions.create(
                 model="gpt-4o",
                 messages=gpt_rules,
                 temperature=0.7
             )
-
-
             resp = refined_resp.choices[0].message.content.strip()
 
             #Save to database
@@ -222,8 +213,7 @@ class Core:
         # filtering the embeddings by source
 
         source_name = source.capitalize()
-        #Goes through dataframe, checks if the source
-        # matches the user's selected source
+        #Goes through dataframe, checks if the source matches the user's selected source
         mask = self.religious_data["Source"] == source_name
         filtered_df = self.religious_data[mask]
 
@@ -234,8 +224,7 @@ class Core:
         filtered = filtered_df.index.tolist()
         filtered_embeddings = self.religious_embeddings[filtered] #Slice the file to keep embeddings of the selected source
 
-
-        # Encoding user input
+         # Encoding user input
         input_embd = self.sbert_model.encode(user_input, convert_to_tensor=True)
 
 
@@ -288,8 +277,8 @@ def quote_endpoint(request: QuoteRequest):
             request.source
         )
         return {
-            "quote": quote,
             "chapter": chapter,
+            "quote": quote,
             "source": source_title
         }
     except Exception:
