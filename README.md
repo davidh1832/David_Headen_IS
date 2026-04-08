@@ -20,11 +20,11 @@ git clone https://github.com/davidh1832/David_Headen_IS.git
   ```
  
 # Files
-app2.py: Streamlit web app implementation of the Echo mental health chatbot
+Streamlit_app.py: Streamlit web app implementation of the Echo mental health chatbot, hosted on a web server.
 
-quote_api.py: RAG retrieval backend logic for Echo. Utilizes Fast API to connect backend logic to Swift UI front-end application
+Backend_logic.py: RAG retrieval backend logic for Echo. Contains data processing, TF-IDF vectorization, database handling, cosine similarity calculations, GPT-4o refinement, and religious quote handling. Utilizes Fast API to connect backend logic to Swift UI front-end application.
 
-Sentiment.py: VADER sentiment analysis file
+Sentiment.py: VADER sentiment and Textblob subjectivity analysis file - determines the sentiment and subjectivity of a user message.
 
 ContentView.swift: Main app UI page in mobile application. Manages conversation state, message rendering, user input, and asynchronous communication with the Python backend API. Displays messages as chat bubbles with timestamps, supports optional religious quote integration (Bible, Quran, Torah), and updates the UI as the user sends and receives messages. 
 
