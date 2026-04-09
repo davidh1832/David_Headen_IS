@@ -9,7 +9,7 @@ Swift
 Streamlit
 
 - Expect a longer loading time on first initialization of the model, needs to precompute embeddings for cosine similarity comparison purposes.
-- 
+  
 # Installation
 - Obtain your OpenAI API key from the OpenAI website.
 - Clone Repository: 
