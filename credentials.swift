@@ -9,7 +9,7 @@ struct LoginView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color.blue_color //Background color
+                Color.blue_color //Blue baxkground
                     .ignoresSafeArea()
                 
                 VStack(spacing: 25) {
@@ -31,13 +31,13 @@ struct LoginView: View {
                     VStack(spacing: 15) {
                         TextField("Email", text: $username)
                             .padding()
-                            .background(Color.green_color) //  Hex
+                            .background(Color.green_color) 
                             .cornerRadius(12)
                             .autocapitalization(.none)
                         
                         SecureField("Password", text: $password)
                             .padding()
-                            .background(Color.green_color) // Hex
+                            .background(Color.green_color) 
                             .cornerRadius(12)
                             .textContentType(.oneTimeCode) //AI generated line, this fixed an error with not being able to enter password in the UI
                     }
