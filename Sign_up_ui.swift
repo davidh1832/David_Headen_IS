@@ -72,7 +72,7 @@ extension SignUpView {
                 .fontWeight(.bold)
             Text("Fill in your details to get started")
                 .font(.subheadline)
-                .foregroundColor(.black.opacity(0.7)) // Darkened for visibility
+                .foregroundColor(.black.opacity(0.7)) 
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.top, 40)
@@ -82,12 +82,12 @@ extension SignUpView {
         HStack(spacing: 15) {
             TextField("First Name", text: $firstName)
                 .padding()
-                .background(Color.green_color) //  Hex
+                .background(Color.green_color) 
                 .cornerRadius(12)
             
             TextField("Last Name", text: $lastName)
                 .padding()
-                .background(Color.green_color) //  Hex
+                .background(Color.green_color) 
                 .cornerRadius(12)
         }
     }
@@ -95,7 +95,7 @@ extension SignUpView {
     private var emailField: some View {
         TextField("Email Address", text: $email)
             .padding()
-            .background(Color.green_color) //  Hex
+            .background(Color.green_color) 
             .cornerRadius(12)
             .keyboardType(.emailAddress)
             .autocapitalization(.none)
@@ -110,14 +110,14 @@ extension SignUpView {
         VStack(spacing: 15) {
             SecureField("Password (min 6 chars)", text: $password)
                 .padding()
-                .background(Color.green_color) //  Hex
+                .background(Color.green_color) 
                 .cornerRadius(12)
                 .textContentType(.oneTimeCode)
                 
             
             SecureField("Confirm Password", text: $confirmPassword)
                 .padding()
-                .background(Color.green_color) // Hex
+                .background(Color.green_color) 
                 .cornerRadius(12)
                 .overlay(
                     RoundedRectangle(cornerRadius: 12)
@@ -177,7 +177,7 @@ extension SignUpView {
 }
 
 // Hex code from https://medium.com/@ant.lucchini/swiftui-hex-color-made-easy-a-simple-extension-for-your-projects-189d200ec915
-// Extensions that allows for hex colors to be used in application
+// Extensions that allows for hex colors to be used throughout the application
 extension Color {
     init(hex: String) {
         let scanner = Scanner(string: hex)
