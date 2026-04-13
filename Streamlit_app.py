@@ -34,7 +34,7 @@ if "chat_history" not in st.session_state:
 if "quote_source" not in st.session_state:
     st.session_state.quote_source = None
 
-st.sidebar.title("Quote Settings")
+st.sidebar.title("Religious Quote Selection")
 quote_choice = st.sidebar.radio(
     "Select Religious Quote Source",
     ("None", "Bible", "Torah", "Quran"),
