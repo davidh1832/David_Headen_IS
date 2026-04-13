@@ -166,13 +166,13 @@ struct MentalHealthChatbotUI: View {
         Task {
             await MainActor.run { isSending = true } // Loading indicator
             
-            // Backend call
+            // Backend call (mental health & religious quote)
             do {
                 var bot_response = try await apiService.getChatbotResponse(
                     userInput: input,
                     userID: self.userID
                 )
-                //QUote request
+                //Quote request
                 if sourceToUse != "None" {
                 if let quoteData = try? await apiService.getReligiousQuote(userInput: input, source: sourceToUse.lowercased()) {
                     let quoteSection = "\n\n\n**The \(quoteData.source) (\(quoteData.chapter)):**\n*\"\(quoteData.quote)\"* "
@@ -228,7 +228,7 @@ struct ChatBubble: View {
             
             VStack(alignment: message.isUser ? .trailing : .leading, spacing: 4) { // User message on right side, bot on left.
                 
-                Text(LocalizedStringKey(message.text)) //AI generated line, makes text markdown, allows bold and italized text
+                Text(LocalizedStringKey(message.text)) //AI generated line, makes text markdown, allows bold and italicized text
                                     .font(.body)
                                     .lineSpacing(4)
                                     .multilineTextAlignment(.leading) // text always starts on left side
@@ -238,12 +238,11 @@ struct ChatBubble: View {
                                     .clipShape(bubbleShape(isUser: message.isUser))
               
                 
-                // Display timestamps of messages
+                // timestamps of messages
                 Text(message.timestamp, style: .time)
                     .font(.caption2)
                     .foregroundColor(.gray)
             }
-            //Aligning text bubbles
             .frame(maxWidth: 300, alignment: message.isUser ? .trailing : .leading) // messages longer than 300 pixels are moved to a new line
             
             // Moves Bot responses to the left
