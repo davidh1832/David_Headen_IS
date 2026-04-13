@@ -1,0 +1,9 @@
+.env
+secrets.env
+__pycache__/
+chat_history.db
+*.db
+*.parquet
+*.pkl
+*.npz
+*.csv
