@@ -98,7 +98,6 @@ for msg in st.session_state.chat_history:
 if st.sidebar.button("Clear Conversation"):
     st.session_state.chat_history = []
     st.rerun()
-st.markdown("---")
+
 st.markdown("This tool is **not a replacement** for professional help. If you're in crisis, please call a mental health hotline or emergency services.")
 
-# Run: streamlit run Streamlit_app.py
