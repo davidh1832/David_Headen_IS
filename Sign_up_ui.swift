@@ -147,7 +147,6 @@ extension SignUpView {
     // submit button to navigate to main page with proper credentials
     private var signUpButton: some View {
         Button(action: {
-            isLoggedIn = true
             navigateToMain = true
         }) {
             Text("Create Account")
