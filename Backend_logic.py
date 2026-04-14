@@ -285,7 +285,4 @@ def quote_endpoint(request: QuoteRequest):
         raise HTTPException(status_code=500, detail= "An error occurred processing the quote request. Please try again later and/or contact support resources.")
 
 
-# Run:
-# cd Desktop
-# cd Chatbot
-# uvicorn Backend_logic:app --reload
+
