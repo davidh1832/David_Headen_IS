@@ -2,7 +2,7 @@ import SwiftUI
 //This is the sign up page where users can enter their credentials to create an account.
 struct SignUpView: View {
     
-    @AppStorage("isLoggedIn") private var isLoggedIn: Bool = false //If logged in, go directly to main app
+   
     @State private var navigateToMain: Bool = false
     // Input fields
     @State private var firstName = ""
