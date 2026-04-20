@@ -36,10 +36,10 @@ class ChatbotAPI {
         
         let (responseData, response) = try await URLSession.shared.data(for: request)// sending
 
-        // http status
+        // verify response is valid http and return 200
+        // If not, status code and server error message are extracted and throw an error
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
             let errorString = String(data: responseData, encoding: .utf8) ?? "Unknown server error"
-            let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 500
             throw NSError(
                 domain: "ChatbotAPI",
                 code: statusCode,
@@ -47,7 +47,7 @@ class ChatbotAPI {
             )
         }
         
-        //Return mental health response from mental health chat pipeline as a string
+        // Decode mental health response from  /chat pipeline as a string
         guard let responseText = String(data: responseData, encoding: .utf8)?.trimmingCharacters(in: CharacterSet(charactersIn: "\"")) else {
             throw NSError(domain: "ChatbotAPI", code: 500, userInfo: [NSLocalizedDescriptionKey: "Could not decode response text."])
         }
