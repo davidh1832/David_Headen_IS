@@ -2,7 +2,7 @@ import SwiftUI
 //This is the sign up page where users can enter their credentials to create an account.
 struct SignUpView: View {
     
-    @State private var navigateToMain: Bool = false
+    @State private var to_main: Bool = false
     // Input fields
     @State private var first_name = ""
     @State private var last_name = ""
@@ -53,7 +53,7 @@ struct SignUpView: View {
                     .padding(.horizontal)
                 }
             }
-            .navigationDestination(isPresented: $navigateToMain) {
+            .navigationDestination(isPresented: $to_main) {
                 MentalHealthChatbotUI()
                     .navigationBarBackButtonHidden(true)
             }
@@ -146,7 +146,7 @@ extension SignUpView {
     // submit button to navigate to main page with credentials
     private var sign_up_button: some View {
         Button(action: {
-            navigateToMain = true
+            to_main = true
         }) {
             Text("Create Account")
                 .fontWeight(.semibold)
